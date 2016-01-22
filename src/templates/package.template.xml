@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<umbPackage>
+  <info>
+    <package>
+      <name><%= name %></name>
+      <version><%= version %></version>
+      <license url="<%= licenseUrl %>"><%= license %></license>
+      <url><%= url %></url>
+      <requirements>
+        <major>7</major>
+        <minor>3</minor>
+        <patch>3</patch>
+      </requirements>
+    </package>
+    <author>
+      <name><%= author %></name>
+      <website><%= authorUrl %></website>
+    </author>
+    <readme><![CDATA[<%= readme %>]]></readme>
+  </info>
+  <DocumentTypes>
+    <DocumentType>
+      <Info>
+        <Name>Content Template</Name>
+        <Alias>ContentTemplate</Alias>
+        <Icon>icon-document-dashed-line</Icon>
+        <Thumbnail>folder.png</Thumbnail>
+        <Description />
+        <AllowAtRoot>False</AllowAtRoot>
+        <IsListView>False</IsListView>
+        <Compositions />
+        <AllowedTemplates />
+        <DefaultTemplate />
+      </Info>
+      <Structure />
+      <GenericProperties>
+        <GenericProperty>
+          <Name>Related Document Types</Name>
+          <Alias>relatedDoctypes</Alias>
+          <Type>RB.DocumentTypePicker</Type>
+          <Definition>8815ecc2-8f3d-4a94-a6f5-43a39723e432</Definition>
+          <Tab>Content</Tab>
+          <Mandatory>False</Mandatory>
+          <Validation />
+          <Description><![CDATA[]]></Description>
+        </GenericProperty>
+      </GenericProperties>
+      <Tabs>
+        <Tab>
+          <Id>15</Id>
+          <Caption>Content</Caption>
+          <SortOrder>0</SortOrder>
+        </Tab>
+      </Tabs>
+    </DocumentType>
+    <DocumentType>
+      <Info>
+        <Name>Content Template Folder</Name>
+        <Alias>ContentTemplateFolder</Alias>
+        <Icon>icon-folder</Icon>
+        <Thumbnail>folder.png</Thumbnail>
+        <Description />
+        <AllowAtRoot>True</AllowAtRoot>
+        <IsListView>False</IsListView>
+        <Compositions />
+        <AllowedTemplates />
+        <DefaultTemplate />
+      </Info>
+      <Structure>
+        <DocumentType>ContentTemplate</DocumentType>
+      </Structure>
+      <GenericProperties />
+      <Tabs />
+    </DocumentType>
+  </DocumentTypes>
+  <Templates />
+  <Stylesheets />
+  <Macros />
+  <DictionaryItems />
+  <Languages />
+  <DataTypes>
+    <DataType Name="Document Type Picker" Id="RB.DocumentTypePicker" Definition="8815ecc2-8f3d-4a94-a6f5-43a39723e432" DatabaseType="Ntext">
+      <PreValues />
+    </DataType>
+  </DataTypes>
+  <!--<control></control>-->
+  <Actions/>
+  <files>
+    <% files.forEach(function(file) { %>
+    <file>
+      <guid><%= file.guid %></guid>
+      <orgPath><%= file.dir %></orgPath>
+      <orgName><%= file.name %></orgName>
+    </file>
+    <% }); %>
+  </files>
+</umbPackage>

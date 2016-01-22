@@ -1,0 +1,13 @@
+{
+  "name": "ContentTemplates",
+  "version": "0.0.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rhythmagency/content-templates"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "grunt": "0.4.5",
+    "grunt-umbraco-package": "^1.0.0"
+  }
+}

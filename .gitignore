@@ -1,0 +1,33 @@
+# Node modules.
+node_modules/
+
+# Folder created by NuGet.
+**/App_Data/NuGetBackup/
+
+# Visual Studio packages.
+**/packages/*/
+
+# Visual Studio build artifacts.
+bin/
+obj/
+
+# Grunt build artifacts.
+dist/
+frontendDocs/
+
+# Visual Studio solution user options.
+*.suo
+.vs/
+
+# Visual Studio project user options.
+*.csproj.user
+
+# WebStorm.
+.idea
+
+# Temporary test folders.
+/source/
+/dest/
+
+# compiled js
+*.min.js
