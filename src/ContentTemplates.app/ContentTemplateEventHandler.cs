@@ -151,15 +151,34 @@
         private void LoadTemplates() {
             try {
                 var service = ApplicationContext.Current.Services.ContentService;
-                Templates = service.GetRootContent()
-                    .FirstOrDefault(c => ContentTemplateFolderAlias.InvariantEquals(c.ContentType.Alias))
-                    .Children().ToList();
-                if (!Templates.Any()) {
-                    LogHelper.Warn<ContentTemplateEventHandler>("No templates loaded.");
+                string rootNodeId = System.Configuration.ConfigurationManager.AppSettings["ContentTemplates-RootNode"];
+                IContent rootNode = null;
+
+                if (!String.IsNullOrWhiteSpace(rootNodeId)) {
+                    // look for a web.config setting to set the root node
+                    Guid rootNodeGuid;
+                    if (Guid.TryParse(rootNodeId, out rootNodeGuid))
+                        rootNode = service.GetById(rootNodeGuid);
+                    int rootNodeInt;
+                    if (Int32.TryParse(rootNodeId, out rootNodeInt))
+                        rootNode = service.GetById(rootNodeInt);
+                }
+
+                if (rootNode == null) // try getting a root node off the content root
+                    rootNode = service.GetRootContent().FirstOrDefault(c => ContentTemplateFolderAlias.InvariantEquals(c.ContentType.Alias));
+
+                if (rootNode == null) { // root node not found, set NO TEMPLATES and report error
+                    Templates = new List<IContent>();
+                    LogHelper.Warn<ContentTemplateEventHandler>("Loading templates failed: root node not found.");
+                } else { // root node found, lets make some templates
+                    Templates = rootNode.Children().ToList();
+                    if (!Templates.Any()) {
+                        LogHelper.Warn<ContentTemplateEventHandler>("Loading templates failed: found root nodes, found no templates.");
+                    }
                 }
             }
             catch (Exception ex) {
-                LogHelper.Error<ContentTemplateEventHandler>("Loading templates failed.", ex);
+                LogHelper.Error<ContentTemplateEventHandler>("Loading templates failed: exception during load.", ex);
             }
         }
 
